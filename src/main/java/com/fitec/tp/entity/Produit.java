@@ -1,5 +1,7 @@
 package com.fitec.tp.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,12 +14,14 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="Produit")
 @NamedQueries({@NamedQuery(name = "produit.all", query = "SELECT p FROM Produit p")})
 @XmlType(namespace="http://entity.tp.fitec.com/")  // le nom du package a l'envers
 @XmlRootElement(name="produit") 
-public class Produit {
+public class Produit implements Serializable, IEntity {
 	 
 	private static final long serialVersionUID = 1L;
 	
@@ -113,6 +117,7 @@ public class Produit {
 	
 	private String image_alt;
 	
+	@JsonIgnore
 	@Override
 	public String toString() {
 		return " [id=" + id + ", libelle=" + libelle + ", categorie=" + categorie + ", prix=" + prix + "]";

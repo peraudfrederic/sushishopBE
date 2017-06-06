@@ -9,10 +9,10 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 <!-- <jta-data-source>java:/DefaultDS</jta-data-source> -->
 <!-- 		<provider>org.hibernate.ejb.HibernatePersistence</provider> -->
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-<!-- 		<class>com.fitec.tp.entity.Auteur</class>   -->
 		<class>com.fitec.tp.entity.Produit</class> 
 		<class>com.fitec.tp.entity.Categorie</class>
-		<class>com.fitec.tp.entity.Promotion</class>				
+		<class>com.fitec.tp.entity.Promotion</class>	
+		<class>com.fitec.tp.entity.User</class>			
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 		<!-- <property name="hibernate.hbm2ddl.auto" value="create-drop" /> -->

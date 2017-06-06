@@ -3,10 +3,10 @@ package com.fitec.tp.dao;
 import java.util.List;
 
 import com.fitec.tp.entity.Produit;
+import com.fitec.tp.entity.User;
 
-public interface IDaoProduit {
+public interface IDaoProduit extends IDao<Produit> {
 	
-	public List<Produit> selectAll();	
 	public Produit selectById(int id);
 	
 	// + autres methodes CRUD

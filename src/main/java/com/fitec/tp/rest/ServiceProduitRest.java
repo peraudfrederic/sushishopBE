@@ -44,7 +44,7 @@ public class ServiceProduitRest {
 	@GET
 	@Path("/all")
 	public List<Produit> rechercherTousLesProduits(){
-		return serviceProduit.tousLesProduits();
+		return serviceProduit.selectAll();
 	}
 	
 //	@DELETE

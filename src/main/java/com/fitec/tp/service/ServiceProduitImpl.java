@@ -25,7 +25,7 @@ public class ServiceProduitImpl implements IServiceProduit{
 	}
 
 	@Override
-	public List<Produit> tousLesProduits() {
+	public List<Produit> selectAll() {
 		return daoProduit.selectAll();
 	}
 	
