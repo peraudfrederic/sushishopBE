@@ -1,0 +1,132 @@
+
+<html>
+<head>
+<script src="jquery-2.2.1.js"></script>
+
+<script>
+	var auteurList;
+	var auteurIdSelected;//id=.id
+	var auteurSelected;
+
+	function display_selected_auteur() {
+		$("#spanMsg").html("selected auteur:" + auteurIdSelected);
+		$('#spanId').html(auteurSelected.id);
+		$('#txtNom').val(auteurSelected.nom);
+		$('#txtPrenom').val(auteurSelected.prenom);
+	}
+
+	function local_update_selected_auteur() {
+		auteurSelected.nom = $('#txtNom').val();
+		auteurSelected.prenom = $('#txtPrenom').val();
+	}
+
+	function refresh_list() {
+
+		$.ajax({
+			type : "GET",
+			url : "services/rest/auteurs/all",
+			contentType : "application/json; charset=utf-8",
+			success : function(data, status, xhr) {
+				/*if(xhr){
+				   var csrfToken = xhr.getResponseHeader("Content-Type");// "Content-Type"				
+				   //alert(csrfToken);
+				}*/
+				if (data) {
+					//alert(JSON.stringify(data));
+					auteurList = data;
+					$('#selAuteur').empty();
+					for (auteurIndex in auteurList) {
+						var auteur = auteurList[auteurIndex];
+						if (auteurIndex == 0) {
+							auteurSelected = auteur;
+							auteurIdSelected = auteur.id;
+						}
+						//alert(JSON.stringify(auteur));
+
+						$('#selAuteur').append(
+								'<option  value="'+ auteur.id +'">' + auteur.id
+										+ ' (' + auteur.nom + ')</option>');
+					}
+					display_selected_auteur();
+				} else {
+					$("#spanMsg").html("Cannot GET auteurs !");
+				}
+			}
+		});
+
+	}
+
+	// fonction() "sans rien" : sera executée au chargement de la page (sans cliquer sur rien)
+	$(function() {
+
+		refresh_list();
+
+		$('#btnUpdate').on(
+				'click',
+				function() {
+					local_update_selected_auteur();
+
+					//$("#spanMsg").html( "message in the bottle" + JSON.stringify(auteurSelected) ) ;
+					$.ajax({
+						type : "PUT",
+						url : "services/rest/auteurs/" + auteurIdSelected,
+						dataType : "json",
+						data : JSON.stringify(auteurSelected), // JSON.stringify : ca convertit un objet en grosse chaine de caractères json (id: 1, nom:blabla, prenom:blabla)
+						contentType : "application/json; charset=utf-8", // pas obligatoire mais c'est plus fiable de l'ajouter
+						success : function(updatedData) {
+							if (updatedData) {
+								$("#spanMsg").html(
+										"updated data (server side):"
+												+ JSON.stringify(updatedData));
+							} else {
+								$("#spanMsg").html("Cannot PUT updated data");
+							}
+						},
+						error : function(xhr, status, error) {
+							$("#spanMsg").html(
+									"status:" + status + " error : " + error);
+						}
+					});
+				});
+
+		$('#btnRefresh').on('click', function() {
+			refresh_list();
+		});
+
+		$('#selAuteur').on('change', function(evt) {
+			auteurIdSelected = $(evt.target).val(); // recupere la valeur de l'objet selectionné (une option choisie dans la liste déroulante select)
+			for (auteurIndex in auteurList) {
+				var auteur = auteurList[auteurIndex];
+				if (auteur.id == auteurIdSelected)
+					auteurSelected = auteur;
+			}
+			display_selected_auteur();
+		});
+	});
+</script>
+</head>
+<body>
+
+
+	auteur (to update) :
+	<select id="selAuteur">
+	</select>
+	<hr />
+	id :
+	<span id="spanId"></span>
+	<br /> nom :
+	<input id="txtNom" type='text' />
+	<br /> prenom :
+	<input id="txtPrenom" type='text' />
+	<br />
+	<!-- puisqu'on est en ajax, on reste sur la meme page -> pas de input type="submit" sinon on aurait quitté la page -->
+	<input type='button' value="update auteur" id="btnUpdate" />
+	<br />
+	<input type='button' value="refresh list" id="btnRefresh" />
+	<br />
+	<span id="spanMsg"></span>
+	<br />
+	<hr />
+	<a href="index.html">retour vers index.html</a>
+</body>
+</html>

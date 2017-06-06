@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/aop
+http://www.springframework.org/schema/aop/spring-aop.xsd
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- Normalement, on avait deja ces deux lignes dans applicationContext 
+		mais on les a doublées ici pour que notre test unitaire marche -->
+	<context:annotation-config></context:annotation-config>
+	<context:component-scan
+		base-package="com.fitec.tp.service, com.fitec.tp.dao, com.fitec.tp.rest" />
+
+	<!-- Configure le lien avec la bdd : -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+		p:location="classpath:/jdbc.properties" />
+	
+	<!-- L'objet DataSource de Spring qui gère la connexion à la bdd -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+		p:driverClassName="${jdbc.driverClassName}" p:url="${jdbc.url}"
+		p:username="${jdbc.username}" p:password="${jdbc.password}" />
+
+	<!-- Configuration de JPA integré à Spring qui, de facon implicite, tient 
+		compte également de META-INF/persistence.xml -->
+	<bean id="myEmf"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"><!-- Initialise un entityManager -->
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"><!-- TransactionManager gere les 
+			transaction dans la bdd -->
+		<property name="entityManagerFactory" ref="myEmf" />
+	</bean>
+
+
+	<!-- prend en compte les @Transactional dans le code java -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+
+
+</beans>
