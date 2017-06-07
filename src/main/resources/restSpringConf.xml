@@ -30,8 +30,10 @@
 		</jaxrs:providers>
 		
 		<jaxrs:serviceBeans>
-			<ref bean="serviceProduitRest" />    <!-- @Component ou @Service sur ServiceProduitRest -->                                
+			<ref bean="serviceProduitRest" />    <!-- @Component ou @Service sur ServiceProduitRest -->
+			<ref bean="serviceUserRest" />    <!-- @Component ou @Service sur ServiceUserRest -->                                
 		</jaxrs:serviceBeans>
+
 		
 <!-- 		<jaxrs:serviceBeans> -->
 <!-- 			<ref bean="serviceAuteurRest" />    @Component ou @Service sur ServiceAuteurRest                                 -->

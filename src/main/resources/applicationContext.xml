@@ -20,6 +20,9 @@
 
 	<jaxws:endpoint id="serviceProduitEndpoint" implementor="#serviceProduitImpl"
 		address="/serviceProduit" />
+		
+	<jaxws:endpoint id="serviceUserEndpoint" implementor="#serviceUserImpl"
+		address="/serviceUser" />
 
 <!-- 	<jaxws:endpoint id="serviceAuteurEndpoint" implementor="#serviceAuteurImpl" -->
 <!-- 		address="/serviceAuteur" /> -->

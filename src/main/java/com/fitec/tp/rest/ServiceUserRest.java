@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -33,7 +34,7 @@ public class ServiceUserRest {
 	
 	/*@GET
 	@Path("/{id}")
-	// url complete : http://localhost:8080/wsSpringCxfWeb/services/rest/auteurs/1
+	// url complete : http://localhost:8080/sushiShop/services/rest/auteurs/1
 	// ou services est configur� dans web.xml et rest dans restSpringConfig et 1 est l'id pour exemple
 	public Auteur rechercherAuteur(@PathParam("id")int id) {
 		return serviceAuteur.rechercherAuteur(id);
@@ -41,7 +42,7 @@ public class ServiceUserRest {
 	
 	@GET
 	@Path("/all")
-	// url complete : http://localhost:8080/wsSpringCxfWeb/services/rest/auteurs/all
+	// url complete : http://localhost:8080/sushiShop/services/rest/users/all
 	// ou services est configur� dans web.xml et rest dans restSpringConfig et 1 est l'id pour exemple
 	public List<User> selectAll() {
 		return serviceUser.selectAll();
@@ -49,7 +50,7 @@ public class ServiceUserRest {
 	
 	/*@DELETE
 	@Path("/{id}")
-	// url complete : http://localhost:8080/wsSpringCxfWeb/services/rest/auteurs/1
+	// url complete : http://localhost:8080/sushiShop/services/rest/auteurs/1
 	// ou services est configur� dans web.xml et rest dans restSpringConfig et 1 est l'id pour exemple
 	public Response supprimerAuteur(@PathParam("id")int id) {
 		try {
@@ -62,11 +63,12 @@ public class ServiceUserRest {
 		
 	}*/
 	
-	@PUT
+	/*
+ 	@PUT
 	@Path("/{id}")
-	// url complete : http://localhost:8080/wsSpringCxfWeb/services/rest/auteurs/1
+	// url complete : http://localhost:8080/sushiShop/services/rest/users/1
 	// ou services est configur� dans web.xml et rest dans restSpringConfig et 1 est l'id pour exemple
-	public Response createUseur(@PathParam("id")int id, User user) {
+	public Response modifyUseur(@PathParam("id")int id, User user) {
 		try {
 			//serviceUser.ajouterUser(user);
 			return Response
@@ -79,23 +81,43 @@ public class ServiceUserRest {
 		}
 		
 	}
+	 */
 	
-	/*@POST
+	@PUT
 	@Path("/")
-	// url complete : http://localhost:8080/wsSpringCxfWeb/services/rest/auteurs/1
-	// ou services est configur� dans web.xml et rest dans restSpringConfig et 1 est l'id pour exemple
-	public Response insererAuteur(Auteur auteur) {
+	// url complete : http://localhost:8080/sushiShop/services/rest/users/
+	// ou services est configur� dans web.xml et rest dans restSpringConfig
+	public Response logUseur(User user) {
 		try {
-			auteur = serviceAuteur.ajouterAuteur(auteur);
+			user = serviceUser.seConnecter(user);
 			return Response
 					.status(Status.OK)
-					.entity(auteur)
+					.entity(user)
 					.build();
 		} catch (Exception e) {
 			e.printStackTrace();
-			return Response.status(Status.CONFLICT).build();   // ou BAD_REQUEST
+			return Response.status(Status.BAD_REQUEST).build();
 		}
 		
-	}*/
+	}
+	
+	@POST
+	@Path("/")
+	@CrossOriginResourceSharing(allowAllOrigins = true)
+	// url complete : http://localhost:8080/sushiShop/services/rest/users/
+	// ou services est configur� dans web.xml et rest dans restSpringConfig
+	public Response createUseur(User user) {
+		try {
+			user = serviceUser.ajouterUser(user);
+			return Response
+					.status(Status.OK)
+					.entity(user)
+					.build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.status(Status.BAD_REQUEST).build();   // ou BAD_REQUEST CONFLICT
+		}
+		
+	}
 	
 }

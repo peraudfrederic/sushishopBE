@@ -14,7 +14,7 @@ import com.fitec.tp.entity.User;
 
 
 @Service // pa d�faut id = calculateurImpl (nom de la classe avcec minuscule au d�but
-@WebService(endpointInterface="com.fitec.tp.service.ServiceUser")
+@WebService(endpointInterface="com.fitec.tp.service.IServiceUser")
 @Transactional  //de spring
 public class ServiceUserImpl implements IServiceUser {
 
@@ -32,10 +32,17 @@ public class ServiceUserImpl implements IServiceUser {
 
 	/*@Override*/
 	public User ajouterUser(User user) {
+		
+		if (user.getNom().isEmpty() || user.getPrenom().isEmpty() || user.getEmail().isEmpty() || user.getMdp().isEmpty())
+			return null;
+		
 		return daoUser.insert(user);
 	}
 	
 	public User seConnecter(User user) {
+		
+		if (user.getEmail().isEmpty() || user.getMdp().isEmpty())
+			return null;
 		
 		User dbUser = daoUser.selectByEmail(user.getEmail());
 		

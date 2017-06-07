@@ -40,10 +40,11 @@ public class DaoUser implements IDaoUser {
 		
 		try {
 			// id auto-incremented grace � @GeneratedValue
-			entityManager.persist(u);
+			//entityManager.persist(u);
+			entityManager.merge(u);
 		}
 		catch (Exception ex) {
-			Logger.getLogger(DaoUser.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(DaoUser.class.getName()).log(Level.SEVERE, ex.getLocalizedMessage(), ex);
 			throw (ex);
 		}
 		

@@ -1,10 +1,14 @@
 package com.fitec.tp.service;
 
+import javax.jws.WebParam;
+import javax.jws.WebService;
+
 import com.fitec.tp.entity.User;
 
+@WebService
 public interface IServiceUser extends IService<User>{
 
-	public User ajouterUser(User user);
+	public User ajouterUser(@WebParam(name="user")User user);
 	
-	public User seConnecter(User user);
+	public User seConnecter(@WebParam(name="user")User user);
 }
