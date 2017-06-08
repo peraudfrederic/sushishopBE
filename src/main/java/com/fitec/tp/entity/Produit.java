@@ -43,11 +43,11 @@ public class Produit implements Serializable, IEntity {
 	
 	@ManyToOne
 	@JoinColumn(name="id_categorie")
-	private Categorie categorie;
+	private Categorie id_categorie;
 	
 	@ManyToOne
 	@JoinColumn(name="id_promotion")
-	private Promotion promotion;
+	private Promotion id_promotion;
 	
 	public Integer getId() {
 		return id;
@@ -89,22 +89,6 @@ public class Produit implements Serializable, IEntity {
 		this.stock = stock;
 	}
 
-	public Categorie getCategorie() {
-		return categorie;
-	}
-
-	public void setCategorie(Categorie categorie) {
-		this.categorie = categorie;
-	}
-
-	public Promotion getPromotion() {
-		return promotion;
-	}
-
-	public void setPromotion(Promotion promotion) {
-		this.promotion = promotion;
-	}
-
 	public String getImage() {
 		return image;
 	}
@@ -120,11 +104,27 @@ public class Produit implements Serializable, IEntity {
 	@JsonIgnore
 	@Override
 	public String toString() {
-		return " [id=" + id + ", libelle=" + libelle + ", categorie=" + categorie + ", prix=" + prix + "]";
+		return " [id=" + id + ", libelle=" + libelle + ", categorie=" + id_categorie + ", prix=" + prix + "]";
 	}
 
 	public String getImage_alt() {
 		return image_alt;
+	}
+
+	public Categorie getId_categorie() {
+		return id_categorie;
+	}
+
+	public void setId_categorie(Categorie id_categorie) {
+		this.id_categorie = id_categorie;
+	}
+
+	public Promotion getId_promotion() {
+		return id_promotion;
+	}
+
+	public void setId_promotion(Promotion id_promotion) {
+		this.id_promotion = id_promotion;
 	}
 
 	public void setImage_alt(String image_alt) {

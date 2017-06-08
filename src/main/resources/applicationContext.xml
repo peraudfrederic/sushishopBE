@@ -21,8 +21,17 @@
 	<jaxws:endpoint id="serviceProduitEndpoint" implementor="#serviceProduitImpl"
 		address="/serviceProduit" />
 		
+	<jaxws:endpoint id="servicePromotionEndpoint" implementor="#servicePromotionImpl"
+		address="/servicePromotion" />		
+		
 	<jaxws:endpoint id="serviceUserEndpoint" implementor="#serviceUserImpl"
 		address="/serviceUser" />
+		
+	<jaxws:endpoint id="serviceCommandeEndpoint" implementor="#serviceCommandeImpl"
+		address="/serviceCommande" />		
+		
+	<jaxws:endpoint id="serviceLigneCommandeEndpoint" implementor="#serviceLigneCommandeImpl"
+		address="/serviceLigneCommande" />		
 
 <!-- 	<jaxws:endpoint id="serviceAuteurEndpoint" implementor="#serviceAuteurImpl" -->
 <!-- 		address="/serviceAuteur" /> -->

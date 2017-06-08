@@ -12,7 +12,7 @@ import com.fitec.tp.entity.Produit;
 
 @Component // ou bien @Repository
 @Transactional // version Spring: c'est Spring qui va gerer les transaction dans la bdd. Pour cela il faudra un TransactionManager (voir fichier jpaSpringConf)
-public class DaoProduitJPA implements IDaoProduit{
+public class DaoProduit implements IDaoProduit{
 	
 	@PersistenceContext(unitName="myPersistenceUnit") // injection de dependances et initialisation de la connexion a la bdd
 	private EntityManager entityManager; // de JPA. Dans le programme, tout se fera a partir de EntityManager
@@ -31,9 +31,9 @@ public class DaoProduitJPA implements IDaoProduit{
 //	@Override
 //	public Produit insertProduit(Produit p) {
 //		entityManager.persist(p);
-//		// la clé primaire auto-incrémentée par mysql
+//		// la clï¿½ primaire auto-incrï¿½mentï¿½e par mysql
 //		// remonte dans l'objet java lors du .persist()
-//		// grace à @GeneratedValue() sur l'id de l'Auteur
+//		// grace ï¿½ @GeneratedValue() sur l'id de l'Auteur
 //		return p;
 //	}
 //
@@ -47,7 +47,7 @@ public class DaoProduitJPA implements IDaoProduit{
 //
 //	@Override
 //	public void updateProduit(Produit p) {
-//	// entityManager.getTransaction().beguin(); // effectué via @Transactional donc pas besoin de gerer les transactions
+//	// entityManager.getTransaction().beguin(); // effectuï¿½ via @Transactional donc pas besoin de gerer les transactions
 //		entityManager.merge(p);
 //		
 //	}

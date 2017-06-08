@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlType;
 
 @Entity
 @Table(name="Promotion")
-@NamedQueries({@NamedQuery(name = "promotion.all", query = "SELECT a FROM Promotion a")})
+@NamedQueries({@NamedQuery(name = "promotion.all", query = "SELECT p FROM Promotion p")})
 @XmlType(namespace="http://entity.tp.fitec.com/")  // le nom du package a l'envers
 @XmlRootElement(name="promotion") 
 public class Promotion implements Serializable, IEntity {
@@ -33,7 +33,23 @@ public class Promotion implements Serializable, IEntity {
 	
 	@Override
 	public String toString() {
-		return "Auteur [id=" + id + ", reduction=" + reduction + "]";
+		return "Promotion [id=" + id + ", reduction=" + reduction + "]";
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getReduction() {
+		return reduction;
+	}
+
+	public void setReduction(String reduction) {
+		this.reduction = reduction;
 	}
 	
 }
