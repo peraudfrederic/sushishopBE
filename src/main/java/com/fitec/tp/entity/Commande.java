@@ -41,6 +41,7 @@ public class Commande implements Serializable, IEntity {
 		this.id = id;
 	}
 	
+
 	@ManyToOne
 	@JoinColumn(name="id_user")
 //	private Integer id_user;

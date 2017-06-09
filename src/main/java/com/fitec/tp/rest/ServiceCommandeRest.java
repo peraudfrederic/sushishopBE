@@ -18,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.fitec.tp.entity.Commande;
+import com.fitec.tp.entity.Panier;
+import com.fitec.tp.entity.User;
 import com.fitec.tp.service.IServiceCommande;
 
 
@@ -48,6 +50,47 @@ public class ServiceCommandeRest {
 		return serviceCommande.selectAll();
 	}
 	
+	@POST
+	@Path("/")
+	public Response insererCommande(Commande commande){ // Response est le type de donn�es pr�d�finie de jx-rs
+		try{
+			serviceCommande.ajouterCommande(commande);
+			return Response
+					.status(Status.OK) // renvoie le statut
+					.entity(commande) // la partie de la donn�e qu'on renvoie
+					.build();
+		}
+		catch(Exception e){
+			e.printStackTrace();			
+//			return Response.status(Status.BAD_REQUEST).build();
+			return Response.status(Status.CONFLICT).build(); 
+			// l'avantage de retourner Response (on aurait pu mettre un void ): 
+			// si �a va, retourne statut et donn�es
+			// si exception, retourne statut
+		}
+	}	
+	
+	@POST
+	@Path("/panier")
+	@CrossOriginResourceSharing(allowAllOrigins = true)
+	// url complete : http://localhost:8080/sushiShop/services/rest/commande/panier
+	// ou services est configur� dans web.xml et rest dans restSpringConfig
+	public Response createPanier(Panier panier) {
+		try {
+			// enregistrerPanier(Panier panier)
+			//panier = serviceCommande.enregistrerPanier(panier);
+			serviceCommande.enregistrerPanier(panier);
+			return Response
+					.status(Status.OK)
+					.entity(panier) // pour l'instant, on laisse même si null, juste pour tester
+					.build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.status(Status.BAD_REQUEST).build();   // ou BAD_REQUEST CONFLICT
+		}		
+	}	
+	
+	
 //	@DELETE
 //	@Path("/delete")
 //	public Response supprimerAuteur(@PathParam("id")int id, Auteur auteur){ // Response est le type de donn�es pr�d�finie de jx-rs
@@ -67,27 +110,8 @@ public class ServiceCommandeRest {
 //			// si exception, retourne statut
 //		}
 //	}
-//
-//	@POST
-//	@Path("/")
-//	public Response insererAuteur(Auteur auteur){ // Response est le type de donn�es pr�d�finie de jx-rs
-//		try{
-//			serviceAuteur.ajouterAuteur(auteur);
-//			return Response
-//					.status(Status.OK) // renvoie le statut
-//					.entity(auteur) // la partie de la donn�e qu'on renvoie
-//					.build();
-//		}
-//		catch(Exception e){
-//			e.printStackTrace();			
-////			return Response.status(Status.BAD_REQUEST).build();
-//			return Response.status(Status.CONFLICT).build(); 
-//			// l'avantage de retourner Response (on aurait pu mettre un void ): 
-//			// si �a va, retourne statut et donn�es
-//			// si exception, retourne statut
-//		}
-//	}	
-//	
+
+	
 //	@PUT
 //	@Path("/{id}")
 //	//url complete : http://localhost:8080/wsSpringCxfWeb/services/rest/auteurs/1

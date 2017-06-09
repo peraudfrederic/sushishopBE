@@ -29,14 +29,14 @@ public class DaoCommande implements IDaoCommande{
 		return entityManager.find(Commande.class, id);
 	}
 
-//	@Override
-//	public Produit insertProduit(Produit p) {
-//		entityManager.persist(p);
-//		// la cl� primaire auto-incr�ment�e par mysql
-//		// remonte dans l'objet java lors du .persist()
-//		// grace � @GeneratedValue() sur l'id de l'Auteur
-//		return p;
-//	}
+	@Override
+	public Commande insertCommande(Commande c) {
+		c = entityManager.merge(c); // fait save or update
+		// la cl� primaire auto-incr�ment�e par mysql
+		// remonte dans l'objet java lors du .persist()
+		// grace � @GeneratedValue() sur l'id de la Commande
+		return c;
+	}
 //
 //	@Override
 //	public void deleteProduit(int id) {

@@ -17,7 +17,7 @@ public interface IServiceLigneCommande extends IService<LigneCommande> {
 	
 	List<LigneCommande> selectAll();
 	
-//	Produit ajouterProduit(@WebParam(name="produit")Produit p);
+	LigneCommande ajouterLigneCommande(@WebParam(name="produit")LigneCommande lc);
 //	
 //	void majProduit(@WebParam(name="produit")Produit p);
 //	

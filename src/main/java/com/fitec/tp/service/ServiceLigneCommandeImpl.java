@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fitec.tp.dao.IDaoLigneCommande;
+import com.fitec.tp.entity.Commande;
 import com.fitec.tp.entity.LigneCommande;
 
 
@@ -30,6 +31,13 @@ public class ServiceLigneCommandeImpl implements IServiceLigneCommande{
 		return daoLigneCommande.selectAll();
 	}
 	
+	@Override
+	public LigneCommande ajouterLigneCommande(LigneCommande lc) {
+		lc = daoLigneCommande.insertLigneCommande(lc);
+		return lc;
+	}
+
+	
 //	@Override
 //	public Auteur rechercherAuteur(int id) {
 //		return daoAuteur.selectById(id);
@@ -39,13 +47,7 @@ public class ServiceLigneCommandeImpl implements IServiceLigneCommande{
 //	public List<Auteur> tousLesAuteurs() {
 //		return daoAuteur.selectAll();
 //	}
-//
-//	@Override
-//	public Auteur ajouterAuteur(Auteur a) {
-//		daoAuteur.insertAuteur(a);
-//		return a;
-//	}
-//
+
 //	@Override
 //	public void majAuteur(Auteur a) {
 //		daoAuteur.updateAuteur(a);		

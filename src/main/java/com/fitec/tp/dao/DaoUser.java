@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fitec.tp.entity.Produit;
 import com.fitec.tp.entity.User;
 
 @Component 		//ou bien @Repository
@@ -41,7 +42,7 @@ public class DaoUser implements IDaoUser {
 		try {
 			// id auto-incremented grace � @GeneratedValue
 			//entityManager.persist(u);
-			entityManager.merge(u);
+			u = entityManager.merge(u);
 		}
 		catch (Exception ex) {
 			Logger.getLogger(DaoUser.class.getName()).log(Level.SEVERE, ex.getLocalizedMessage(), ex);
@@ -67,6 +68,12 @@ public class DaoUser implements IDaoUser {
 			usr = users.get(0);
 		
 		return usr;
+	}
+	
+	
+	@Override
+	public com.fitec.tp.entity.User selectById(int id) {
+		return entityManager.find(User.class, id);
 	}
 	
 

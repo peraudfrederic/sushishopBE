@@ -16,6 +16,7 @@ import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.fitec.tp.entity.Produit;
 import com.fitec.tp.entity.User;
 import com.fitec.tp.service.IServiceUser;
 
@@ -118,6 +119,16 @@ public class ServiceUserRest {
 			return Response.status(Status.BAD_REQUEST).build();   // ou BAD_REQUEST CONFLICT
 		}
 		
+	}
+	
+	@GET
+	@Path("/{id}") // ce parametre vient de @PathParam("id")
+	// url complete : http://localhost:8080/wsSpringCxfWeb/services/rest/auteurs/1 : 
+	// --> "services" vient de web.xml; 
+	// --> "rest" = path sur cette classe; 1=id
+	// --> "rest" vient de restSpringConf.xml
+	public User rechercherUser(@PathParam("id")int id){ // retourne un objet de type Auteur
+		return serviceUser.rechercherUser(id);
 	}
 	
 }

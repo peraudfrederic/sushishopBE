@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fitec.tp.dao.IDaoUser;
+import com.fitec.tp.entity.Produit;
 import com.fitec.tp.entity.User;
 
 
@@ -51,6 +52,11 @@ public class ServiceUserImpl implements IServiceUser {
 		
 		return dbUser;	
 	}
+	
+	@Override
+	public User rechercherUser(int id) {
+		return daoUser.selectById(id);
+	}	
 	
 /*
 	@Override

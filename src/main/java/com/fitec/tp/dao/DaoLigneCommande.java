@@ -29,15 +29,15 @@ public class DaoLigneCommande implements IDaoLigneCommande{
 		return entityManager.find(LigneCommande.class, id);
 	}
 
-//	@Override
-//	public Produit insertProduit(Produit p) {
-//		entityManager.persist(p);
-//		// la cl� primaire auto-incr�ment�e par mysql
-//		// remonte dans l'objet java lors du .persist()
-//		// grace � @GeneratedValue() sur l'id de l'Auteur
-//		return p;
-//	}
-//
+	@Override
+	public LigneCommande insertLigneCommande(LigneCommande lc) {
+		lc = entityManager.merge(lc); // fait save or update
+		// la cl� primaire auto-incr�ment�e par mysql
+		// remonte dans l'objet java lors du .persist()
+		// grace � @GeneratedValue() sur l'id de l'Auteur
+		return lc;
+	}
+
 //	@Override
 //	public void deleteProduit(int id) {
 //		Produit p = entityManager.find(Produit.class, id);

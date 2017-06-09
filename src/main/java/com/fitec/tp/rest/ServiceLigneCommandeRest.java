@@ -48,6 +48,26 @@ public class ServiceLigneCommandeRest {
 		return serviceLigneCommande.selectAll();
 	}
 	
+	@POST
+	@Path("/")
+	public Response insererLigneCommande(LigneCommande lc){ // Response est le type de donn�es pr�d�finie de jx-rs
+		try{
+			serviceLigneCommande.ajouterLigneCommande(lc);
+			return Response
+					.status(Status.OK) // renvoie le statut
+					.entity(lc) // la partie de la donn�e qu'on renvoie
+					.build();
+		}
+		catch(Exception e){
+			e.printStackTrace();			
+			// return Response.status(Status.BAD_REQUEST).build();
+			return Response.status(Status.CONFLICT).build(); 
+			// l'avantage de retourner Response (on aurait pu mettre un void ): 
+			// si �a va, retourne statut et donn�es
+			// si exception, retourne statut
+		}
+	}		
+	
 //	@DELETE
 //	@Path("/delete")
 //	public Response supprimerAuteur(@PathParam("id")int id, Auteur auteur){ // Response est le type de donn�es pr�d�finie de jx-rs
@@ -67,27 +87,8 @@ public class ServiceLigneCommandeRest {
 //			// si exception, retourne statut
 //		}
 //	}
-//
-//	@POST
-//	@Path("/")
-//	public Response insererAuteur(Auteur auteur){ // Response est le type de donn�es pr�d�finie de jx-rs
-//		try{
-//			serviceAuteur.ajouterAuteur(auteur);
-//			return Response
-//					.status(Status.OK) // renvoie le statut
-//					.entity(auteur) // la partie de la donn�e qu'on renvoie
-//					.build();
-//		}
-//		catch(Exception e){
-//			e.printStackTrace();			
-////			return Response.status(Status.BAD_REQUEST).build();
-//			return Response.status(Status.CONFLICT).build(); 
-//			// l'avantage de retourner Response (on aurait pu mettre un void ): 
-//			// si �a va, retourne statut et donn�es
-//			// si exception, retourne statut
-//		}
-//	}	
-//	
+
+
 //	@PUT
 //	@Path("/{id}")
 //	//url complete : http://localhost:8080/wsSpringCxfWeb/services/rest/auteurs/1

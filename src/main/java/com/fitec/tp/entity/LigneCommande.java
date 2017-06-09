@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="ligne_commande") // nom exact de la table dans la bdd
 @NamedQueries({@NamedQuery(name = "ligne_commande.all", query = "SELECT lc FROM LigneCommande lc")})
@@ -24,6 +26,18 @@ public class LigneCommande implements Serializable, IEntity{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
+	public LigneCommande(){
+		super();
+	}
+	
+	public LigneCommande(Integer id, Commande id_commande, Produit id_produit, Integer quantite, Float prix){
+		this.id = id;
+		this.id_commande = id_commande;
+		this.id_produit = id_produit;
+		this.quantite = quantite;
+		this.prix = prix;
+	}
 	
 	@ManyToOne
 	@JoinColumn(name="id_commande")	
@@ -76,5 +90,12 @@ public class LigneCommande implements Serializable, IEntity{
 	public void setPrix(Float prix) {
 		this.prix = prix;
 	}
+	
+	@JsonIgnore
+	@Override
+	public String toString() {
+		return " [id=" + id + ", id_commande=" + id_commande + ", id_produit=" + id_produit + ", quantité=" + quantite + ", prix=" + prix + "]";
+	}
+
 	
 }

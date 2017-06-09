@@ -1,5 +1,7 @@
 package com.fitec.tp.test;
 
+import java.util.Date;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.fitec.tp.entity.Commande;
 import com.fitec.tp.entity.LigneCommande;
+import com.fitec.tp.entity.Produit;
+import com.fitec.tp.entity.User;
 import com.fitec.tp.service.IServiceLigneCommande;
 
 
@@ -36,5 +41,34 @@ public class TestServiceLigneCommande {
 		System.out.println(lc.toString());
 		
 	}
+	
+	@Test
+	public void testCreerLigneCommande(){
+		
+		/* id, 
+		 * 
+		 * id_commande, 
+		 * id_produit, 
+		 * quantite, 
+		 * prix */
+		
+		LigneCommande newLigneCommande = new LigneCommande();
+		newLigneCommande.setQuantite(3);
+		newLigneCommande.setPrix((float) 15.2);
+		
+		Commande commande = new Commande();
+		commande.setId(1);		
+		newLigneCommande.setId_commande(commande);
+		
+		Produit produit = new Produit();
+		produit.setId(1);
+		newLigneCommande.setId_produit(produit);
+		
+		LigneCommande lc = serviceLigneCommande.ajouterLigneCommande(newLigneCommande);
+		Assert.assertTrue(lc.getId() != null);
+		System.out.println(lc.toString());
+		
+	}
+	
 	
 }
