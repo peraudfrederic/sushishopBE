@@ -21,7 +21,7 @@ public class DaoLigneCommande implements IDaoLigneCommande{
 	@Override
 	public List<com.fitec.tp.entity.LigneCommande> selectAll() {
 		// return entityManager.createQuery("SELECT * FROM Auteur a", Auteur.class).getResultList();
-		return entityManager.createNamedQuery("lignecommande.all" , LigneCommande.class).getResultList(); // avec NamedQuery
+		return entityManager.createNamedQuery("ligne_commande.all" , LigneCommande.class).getResultList(); // avec NamedQuery
 	}
 	
 	@Override

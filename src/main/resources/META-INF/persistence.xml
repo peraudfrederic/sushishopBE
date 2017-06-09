@@ -12,7 +12,9 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 		<class>com.fitec.tp.entity.Produit</class> 
 		<class>com.fitec.tp.entity.Categorie</class>
 		<class>com.fitec.tp.entity.Promotion</class>	
-		<class>com.fitec.tp.entity.User</class>			
+		<class>com.fitec.tp.entity.User</class>	
+		<class>com.fitec.tp.entity.Commande</class>	
+		<class>com.fitec.tp.entity.LigneCommande</class>							
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 		<!-- <property name="hibernate.hbm2ddl.auto" value="create-drop" /> -->

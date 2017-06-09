@@ -3,6 +3,7 @@ package com.fitec.tp.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,12 +13,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-@Table(name="Commande")
+@Table(name="commande")
 @NamedQueries({@NamedQuery(name = "commande.all", query = "SELECT c FROM Commande c")})
 @XmlType(namespace="http://entity.tp.fitec.com/")  // le nom du package a l'envers
 @XmlRootElement(name="commande") 
@@ -59,15 +63,23 @@ public class Commande implements Serializable, IEntity {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-
-	public List<LigneCommande> getLignesCommande() {
+	
+    @OneToMany
+    @JoinColumn(name="id")
+	private Set<LigneCommande> lignesCommande;	
+	
+	public Set<LigneCommande> getLignesCommande() {
 		return lignesCommande;
 	}
 
-	public void setLignesCommande(List<LigneCommande> lignesCommande) {
+	public void setLignesCommande(Set<LigneCommande> lignesCommande) {
 		this.lignesCommande = lignesCommande;
 	}
-	
-	private List<LigneCommande> lignesCommande;	
+
+	@JsonIgnore
+	@Override
+	public String toString() {
+		return " [id=" + id + ", id_user=" + id_user + ", date=" + date + "]";
+	}
 	
 }

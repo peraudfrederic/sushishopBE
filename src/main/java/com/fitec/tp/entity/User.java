@@ -13,13 +13,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @Entity
-@Table(name="User")
+@Table(name="user") // nom exact de la table dans la bdd
 @NamedQueries({
 @NamedQuery(name="user.all", query="SELECT a FROM User a"),
 @NamedQuery(name="user.mail", query="SELECT a FROM User a WHERE a.email = :email ")
 })
 @XmlType(namespace="http://entity.projet.fitec.fr/")	// pour aider � la deserialisation
-@XmlRootElement(name="user")						// pour aider � la deserialisation
+//@XmlRootElement(name="user")						// pour aider � la deserialisation
 public class User implements Serializable, IEntity{
 	
 	private static final long serialVersionUID = 1L;

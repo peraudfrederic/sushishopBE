@@ -17,10 +17,10 @@ import javax.xml.bind.annotation.XmlType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="Produit")
+@Table(name="produit") // nom exact de la table
 @NamedQueries({@NamedQuery(name = "produit.all", query = "SELECT p FROM Produit p")})
 @XmlType(namespace="http://entity.tp.fitec.com/")  // le nom du package a l'envers
-@XmlRootElement(name="produit") 
+//@XmlRootElement(name="produit") // ne sert que dans du xml
 public class Produit implements Serializable, IEntity {
 	 
 	private static final long serialVersionUID = 1L;

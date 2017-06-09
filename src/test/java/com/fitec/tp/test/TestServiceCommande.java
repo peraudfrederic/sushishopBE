@@ -30,11 +30,19 @@ public class TestServiceCommande {
 	 */
 	
 	@Test
-	public void testRechercherProduit(){
+	public void testRechercherCommande(){
 		Commande c = serviceCommande.rechercherCommande(1);
 		Assert.assertTrue(c.getId() == 1);
 		System.out.println(c.toString());
 		
 	}
+	
+//	@Test
+//	public void testCreerCommande(){
+//		Commande c = serviceCommande.rechercherCommande(1);
+//		Assert.assertTrue(c.getId() == 1);
+//		System.out.println(c.toString());
+//		
+//	}
 	
 }

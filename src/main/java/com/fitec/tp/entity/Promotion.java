@@ -13,10 +13,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @Entity
-@Table(name="Promotion")
+@Table(name="promotion") // nom exact de la table dans la bdd
 @NamedQueries({@NamedQuery(name = "promotion.all", query = "SELECT p FROM Promotion p")})
 @XmlType(namespace="http://entity.tp.fitec.com/")  // le nom du package a l'envers
-@XmlRootElement(name="promotion") 
+//@XmlRootElement(name="promotion") // ne sert que dans du xml
 public class Promotion implements Serializable, IEntity {
 	 
 	private static final long serialVersionUID = 1L;

@@ -15,10 +15,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @Entity
-@Table(name="LigneCommande")
-@NamedQueries({@NamedQuery(name = "lignecommande", query = "SELECT lc FROM LigneCommande lc")})
+@Table(name="ligne_commande") // nom exact de la table dans la bdd
+@NamedQueries({@NamedQuery(name = "ligne_commande.all", query = "SELECT lc FROM LigneCommande lc")})
 @XmlType(namespace="http://entity.tp.fitec.com/")  // le nom du package a l'envers
-@XmlRootElement(name="lignecommande") 
+//@XmlRootElement(name="ligne_commande") // ne sert que pour du xml
 public class LigneCommande implements Serializable, IEntity{
 
 	@Id

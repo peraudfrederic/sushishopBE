@@ -30,7 +30,7 @@ public class TestServiceLigneCommande {
 	 */
 	
 	@Test
-	public void testRechercherProduit(){
+	public void testRechercherLigneCommande(){
 		LigneCommande lc = serviceLigneCommande.rechercherLigneCommande(1);
 		Assert.assertTrue(lc.getId() == 1);
 		System.out.println(lc.toString());

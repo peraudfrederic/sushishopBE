@@ -32,7 +32,9 @@
 		<jaxrs:serviceBeans>
 			<ref bean="serviceProduitRest" />    <!-- @Component ou @Service sur ServiceProduitRest -->
 			<ref bean="serviceUserRest" />    <!-- @Component ou @Service sur ServiceUserRest --> 
-			<ref bean="servicePromotionRest" />    <!-- @Component ou @Service sur ServicePromotionRest -->  			                               
+			<ref bean="servicePromotionRest" />    <!-- @Component ou @Service sur ServicePromotionRest --> 
+			<ref bean="serviceCommandeRest" />    <!-- @Component ou @Service sur ServiceCommandeRest --> 			                               
+			<ref bean="serviceLigneCommandeRest" />    <!-- @Component ou @Service sur ServiceLigneCommandeRest -->
 		</jaxrs:serviceBeans>
 
 		
