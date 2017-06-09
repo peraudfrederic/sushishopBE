@@ -83,4 +83,9 @@ public class Commande implements Serializable, IEntity {
 		return " [id=" + id + ", id_user=" + id_user + ", date=" + date + "]";
 	}
 	
+	@JsonIgnore
+	public String toStringLignes() {
+		return lignesCommande.toString();
+	}
+	
 }

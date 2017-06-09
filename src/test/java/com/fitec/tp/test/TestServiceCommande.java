@@ -40,6 +40,8 @@ public class TestServiceCommande {
 		Assert.assertTrue(c.getId() == 1);
 		System.out.println(c.toString());
 		
+		System.out.println(c.toStringLignes());
+		
 	}
 	
 	@Test

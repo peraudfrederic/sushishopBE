@@ -73,7 +73,7 @@ public class ServiceCommandeRest {
 	@POST
 	@Path("/panier")
 	@CrossOriginResourceSharing(allowAllOrigins = true)
-	// url complete : http://localhost:8080/sushiShop/services/rest/commande/panier
+	// url complete : http://localhost:8080/sushiShop/services/rest/commandes/panier
 	// ou services est configur� dans web.xml et rest dans restSpringConfig
 	public Response createPanier(Panier panier) {
 		try {
