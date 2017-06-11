@@ -37,7 +37,7 @@ public class ServiceCommandeRest {
 	
 	@GET
 	@Path("/{id}") // ce parametre vient de @PathParam("id")
-	// url complete : http://localhost:8080/wsSpringCxfWeb/services/rest/auteurs/1 : 
+	// url complete : http://localhost:8080/sushiShop/services/rest/commandes/1
 	// --> "services" vient de web.xml; 
 	// --> "rest" = path sur cette classe; 1=id
 	// --> "rest" vient de restSpringConf.xml
@@ -46,7 +46,20 @@ public class ServiceCommandeRest {
 	}
 	
 	@GET
+	@Path("/user/{id}") // ce parametre vient de @PathParam("id")
+	// url complete : http://localhost:8080/sushiShop/services/rest/commandes/user/1
+	// --> "services" vient de web.xml; 
+	// --> "rest" = path sur cette classe; 1=id
+	// --> "rest" vient de restSpringConf.xml
+	public List<Commande> rechercherCommandeByUser(@PathParam("id")int id){ // retourne un objet de type Commande
+		User user = new User();
+		user.setId(id);
+		return serviceCommande.rechercherCommandeByUser(user);
+	}
+	
+	@GET
 	@Path("/all")
+	// url complete : http://localhost:8080/sushiShop/services/rest/commandes/all
 	public List<Commande> rechercherToutesLesCommande(){
 		return serviceCommande.selectAll();
 	}

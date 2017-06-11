@@ -21,19 +21,19 @@ import com.fitec.tp.entity.Produit;
 import com.fitec.tp.service.IServiceProduit;
 
 @Path("/produits")
-@Produces("application/json") // format renvoyé
+@Produces("application/json") // format renvoyï¿½
 @Component // ou @Service : pour prise en charge par Spring
 @Consumes("application/json") 
 @CrossOriginResourceSharing(allowAllOrigins = true)
 public class ServiceProduitRest {
 	
 	@Autowired
-	private IServiceProduit serviceProduit; // service interne (appelé en interne)
+	private IServiceProduit serviceProduit; // service interne (appelï¿½ en interne)
 	// ou private IDaoAuteur daoAuteur; // dao interne
 	
 	@GET
 	@Path("/{id}") // ce parametre vient de @PathParam("id")
-	// url complete : http://localhost:8080/wsSpringCxfWeb/services/rest/auteurs/1 : 
+	// url complete : http://localhost:8080/sushiShop/services/rest/produits/1 
 	// --> "services" vient de web.xml; 
 	// --> "rest" = path sur cette classe; 1=id
 	// --> "rest" vient de restSpringConf.xml
@@ -43,18 +43,19 @@ public class ServiceProduitRest {
 	
 	@GET
 	@Path("/all")
+	// url complete : http://localhost:8080/sushiShop/services/rest/produits/all
 	public List<Produit> rechercherTousLesProduits(){
 		return serviceProduit.selectAll();
 	}
 	
 //	@DELETE
 //	@Path("/delete")
-//	public Response supprimerAuteur(@PathParam("id")int id, Auteur auteur){ // Response est le type de données prédéfinie de jx-rs
+//	public Response supprimerAuteur(@PathParam("id")int id, Auteur auteur){ // Response est le type de donnï¿½es prï¿½dï¿½finie de jx-rs
 //		try{
 //			serviceAuteur.supprimerAuteur(id);
 //			return Response
 //					.status(Status.OK) // renvoie le statut
-//					.entity(auteur) // la partie de la donnée qu'on renvoie
+//					.entity(auteur) // la partie de la donnï¿½e qu'on renvoie
 //					.build();
 //		}
 //		catch(Exception e){
@@ -62,19 +63,19 @@ public class ServiceProduitRest {
 ////			return Response.status(Status.BAD_REQUEST).build();
 //			return Response.status(Status.NOT_FOUND).build(); 
 //			// l'avantage de retourner Response (on aurait pu mettre un void ): 
-//			// si ça va, retourne statut et données
+//			// si ï¿½a va, retourne statut et donnï¿½es
 //			// si exception, retourne statut
 //		}
 //	}
 //
 //	@POST
 //	@Path("/")
-//	public Response insererAuteur(Auteur auteur){ // Response est le type de données prédéfinie de jx-rs
+//	public Response insererAuteur(Auteur auteur){ // Response est le type de donnï¿½es prï¿½dï¿½finie de jx-rs
 //		try{
 //			serviceAuteur.ajouterAuteur(auteur);
 //			return Response
 //					.status(Status.OK) // renvoie le statut
-//					.entity(auteur) // la partie de la donnée qu'on renvoie
+//					.entity(auteur) // la partie de la donnï¿½e qu'on renvoie
 //					.build();
 //		}
 //		catch(Exception e){
@@ -82,7 +83,7 @@ public class ServiceProduitRest {
 ////			return Response.status(Status.BAD_REQUEST).build();
 //			return Response.status(Status.CONFLICT).build(); 
 //			// l'avantage de retourner Response (on aurait pu mettre un void ): 
-//			// si ça va, retourne statut et données
+//			// si ï¿½a va, retourne statut et donnï¿½es
 //			// si exception, retourne statut
 //		}
 //	}	
@@ -90,13 +91,13 @@ public class ServiceProduitRest {
 //	@PUT
 //	@Path("/{id}")
 //	//url complete : http://localhost:8080/wsSpringCxfWeb/services/rest/auteurs/1
-//	//où services est configuré dans web.xml et rest dans restSpringConf.xml
+//	//oï¿½ services est configurï¿½ dans web.xml et rest dans restSpringConf.xml
 //	public Response majAuteur(@PathParam("id")int id,Auteur auteur){
 //		try {
 //			serviceAuteur.majAuteur(auteur);
 //			return Response
 //					.status(Status.OK)
-//					.entity(auteur) //partie "donnée" de la réponse renvoyée
+//					.entity(auteur) //partie "donnï¿½e" de la rï¿½ponse renvoyï¿½e
 //					.build();
 //		} catch (Exception e) {
 //			e.printStackTrace();

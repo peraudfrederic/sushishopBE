@@ -8,8 +8,8 @@ public class Panier implements Serializable, IEntity {
 
 	List<LigneCommande> listeLignesCommandes;
 
-	//User id_user;
-	int id_user;
+	User id_user;
+//	int id_user;
 
 	public List<LigneCommande> getListeLignesCommandes() {
 		return listeLignesCommandes;
@@ -26,4 +26,5 @@ public class Panier implements Serializable, IEntity {
 	public void setId_user(User id_user) {
 		this.id_user = id_user;
 	}
+
 }

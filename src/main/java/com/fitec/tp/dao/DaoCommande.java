@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fitec.tp.entity.Commande;
+import com.fitec.tp.entity.User;
 
 
 @Component // ou bien @Repository
@@ -37,6 +38,17 @@ public class DaoCommande implements IDaoCommande{
 		// grace � @GeneratedValue() sur l'id de la Commande
 		return c;
 	}
+	
+	@Override
+	public List<com.fitec.tp.entity.Commande> selectByUser(User idUser) {
+		
+		List<Commande> commandes = entityManager.createNamedQuery("commande.idUser", Commande.class)
+				.setParameter("id_user", idUser)
+				.getResultList();
+		
+		return commandes;
+	}
+	
 //
 //	@Override
 //	public void deleteProduit(int id) {

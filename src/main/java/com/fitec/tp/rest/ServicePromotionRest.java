@@ -35,7 +35,7 @@ public class ServicePromotionRest {
 	
 	@GET
 	@Path("/{id}") // ce parametre vient de @PathParam("id")
-	// url complete : http://localhost:8080/wsSpringCxfWeb/services/rest/auteurs/1 : 
+	// url complete : http://localhost:8080/sushiShop/services/rest/promotions/1
 	// --> "services" vient de web.xml; 
 	// --> "rest" = path sur cette classe; 1=id
 	// --> "rest" vient de restSpringConf.xml
@@ -45,6 +45,7 @@ public class ServicePromotionRest {
 	
 	@GET
 	@Path("/all")
+	// url complete : http://localhost:8080/sushiShop/services/rest/promotions/all
 	public List<Promotion> rechercherToutesLesPromotion(){
 		return servicePromotion.selectAll();
 	}
