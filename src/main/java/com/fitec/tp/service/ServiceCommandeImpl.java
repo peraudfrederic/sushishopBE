@@ -15,6 +15,7 @@ import com.fitec.tp.entity.Commande;
 import com.fitec.tp.entity.LigneCommande;
 import com.fitec.tp.entity.Panier;
 import com.fitec.tp.entity.Produit;
+import com.fitec.tp.entity.User;
 
 
 @WebService(endpointInterface="com.fitec.tp.service.IServiceCommande")
@@ -49,7 +50,7 @@ public class ServiceCommandeImpl implements IServiceCommande{
 		Commande newCommande = new Commande();
 		newCommande.setId_user(panier.getId_user());
 		newCommande.setDate(date);
-		
+	
 		List<LigneCommande> listeLignesCommandes = panier.getListeLignesCommandes();
 		
 		//methode 2 -----------------------
@@ -61,6 +62,12 @@ public class ServiceCommandeImpl implements IServiceCommande{
 		daoCommande.insertCommande(newCommande);   // a priori va inserer les lignes commandes + la commande en bdd
 		
 		//return newCommande;			
+	}
+
+
+	@Override
+	public List<Commande> rechercherCommandeByUser(User id_user) {
+		return daoCommande.selectByUser(id_user);
 	}
 		
 	

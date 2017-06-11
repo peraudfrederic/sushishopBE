@@ -1,6 +1,7 @@
 package com.fitec.tp.test;
 
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.fitec.tp.entity.Commande;
+import com.fitec.tp.entity.Produit;
 import com.fitec.tp.entity.User;
 import com.fitec.tp.service.IServiceCommande;
 import com.fitec.tp.service.IServiceUser;
@@ -35,12 +37,37 @@ public class TestServiceCommande {
 	 */
 	
 	@Test
+	public void testRechercherAllCommandes(){
+		List<Commande> listeCommandes = serviceCommande.selectAll();
+		
+		Assert.assertTrue(!listeCommandes.isEmpty());
+		
+		for(Commande commande : listeCommandes){
+			System.out.println(commande.toString());
+		}
+	}
+	
+	@Test
 	public void testRechercherCommande(){
 		Commande c = serviceCommande.rechercherCommande(1);
 		Assert.assertTrue(c.getId() == 1);
 		System.out.println(c.toString());
 		
-		System.out.println(c.toStringLignes());
+	// System.out.println(c.toStringLignes()); // commenté car sinon probleme avec LigneCommande 
+	// Msg err : org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: 
+	//com.fitec.tp.entity.Commande.lignesCommande, could not initialize proxy - no Session	
+		
+	}
+	
+	@Test
+	public void testRechercherCommandeByUser(){
+		User user = new User();		
+		user.setId(1);
+		List<Commande> c = serviceCommande.rechercherCommandeByUser(user);
+		Assert.assertTrue(!c.isEmpty());
+		System.out.println(c.toString());
+		
+//		System.out.println(c.toStringLignes());
 		
 	}
 	

@@ -7,6 +7,7 @@ import javax.jws.WebService;
 
 import com.fitec.tp.entity.Commande;
 import com.fitec.tp.entity.Panier;
+import com.fitec.tp.entity.User;
 
 
 @WebService
@@ -15,6 +16,8 @@ import com.fitec.tp.entity.Panier;
 public interface IServiceCommande extends IService<Commande> {
 	
 	Commande rechercherCommande(@WebParam(name="id")int id);
+	
+	List<Commande> rechercherCommandeByUser(@WebParam(name="id")User id_user);
 	
 	List<Commande> selectAll();
 	

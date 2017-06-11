@@ -34,7 +34,7 @@ public class ServiceLigneCommandeRest {
 	
 	@GET
 	@Path("/{id}") // ce parametre vient de @PathParam("id")
-	// url complete : http://localhost:8080/wsSpringCxfWeb/services/rest/auteurs/1 : 
+	// url complete : http://localhost:8080/sushiShop/services/rest/lignescommandes/1
 	// --> "services" vient de web.xml; 
 	// --> "rest" = path sur cette classe; 1=id
 	// --> "rest" vient de restSpringConf.xml
@@ -44,6 +44,7 @@ public class ServiceLigneCommandeRest {
 	
 	@GET
 	@Path("/all")
+	// url complete : http://localhost:8080/sushiShop/services/rest/lignescommandes/all
 	public List<LigneCommande> rechercherTousLesProduits(){
 		return serviceLigneCommande.selectAll();
 	}

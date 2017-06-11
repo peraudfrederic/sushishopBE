@@ -22,7 +22,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="commande")
-@NamedQueries({@NamedQuery(name = "commande.all", query = "SELECT c FROM Commande c")})
+@NamedQueries({
+	@NamedQuery(name = "commande.all", query = "SELECT c FROM Commande c"),
+	@NamedQuery(name = "commande.idUser", query = "SELECT c FROM Commande c WHERE c.id_user = :id_user")
+})
 @XmlType(namespace="http://entity.tp.fitec.com/")  // le nom du package a l'envers
 @XmlRootElement(name="commande") 
 public class Commande implements Serializable, IEntity {
@@ -65,6 +68,7 @@ public class Commande implements Serializable, IEntity {
 		this.date = date;
 	}
 	
+	@JsonIgnore
     @OneToMany
     @JoinColumn(name="id")
 	private Set<LigneCommande> lignesCommande;	

@@ -1,5 +1,7 @@
 package com.fitec.tp.test;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,12 +18,12 @@ import com.fitec.tp.service.IServiceProduit;
 public class TestServiceProduit {
 
 	@Autowired
-	private IServiceProduit serviceProduit; // à tester
+	private IServiceProduit serviceProduit; // ï¿½ tester
 	
 	/*
 	 * D'habitude, on met @Before
 	 * Ici, grace aux annotations qu'on a mises (@RunWith et @ContextConfiguration), on n'en n'a pas besoin
-	 * Ceci ameliore les performances : chargé en memoire qu'une seule fois
+	 * Ceci ameliore les performances : chargï¿½ en memoire qu'une seule fois
 	 * @Before ou @BeforeClass
 	 * public void test() {
 			SpringContext ctx = new ClassPathXmlApplicationContext... etc
@@ -34,6 +36,17 @@ public class TestServiceProduit {
 		Assert.assertTrue(p.getId() == 1);
 		System.out.println(p.toString());
 		
+	}
+	
+	@Test
+	public void testRechercherAllProduits(){
+		List<Produit> listeProduits = serviceProduit.selectAll();
+		
+		Assert.assertTrue(!listeProduits.isEmpty());
+		
+		for(Produit produit : listeProduits){
+			System.out.println(produit.toString());
+		}
 	}
 	
 }
