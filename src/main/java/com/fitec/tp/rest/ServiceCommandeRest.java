@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.fitec.tp.entity.Commande;
+import com.fitec.tp.entity.LignePanier;
 import com.fitec.tp.entity.Panier;
 import com.fitec.tp.entity.User;
 import com.fitec.tp.service.IServiceCommande;
@@ -71,7 +72,7 @@ public class ServiceCommandeRest {
 	}	
 	
 	@POST
-	@Path("/panier")
+	@Path("/panier2")
 	@CrossOriginResourceSharing(allowAllOrigins = true)
 	// url complete : http://localhost:8080/sushiShop/services/rest/commandes/panier
 	// ou services est configur� dans web.xml et rest dans restSpringConfig
@@ -89,6 +90,27 @@ public class ServiceCommandeRest {
 			return Response.status(Status.BAD_REQUEST).build();   // ou BAD_REQUEST CONFLICT
 		}		
 	}	
+	
+	
+	@POST
+	@Path("/panier")
+	@CrossOriginResourceSharing(allowAllOrigins = true)
+	// url complete : http://localhost:8080/sushiShop/services/rest/commandes/panier
+	// ou services est configur� dans web.xml et rest dans restSpringConfig
+	public Response createPanier(LignePanier[] panier) {
+		try {
+			// enregistrerPanier(Panier panier)
+			//panier = serviceCommande.enregistrerPanier(panier);
+			serviceCommande.enregistrerPanier(panier);
+			return Response
+					.status(Status.OK)
+					.entity(panier) // pour l'instant, on laisse même si null, juste pour tester
+					.build();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.status(Status.BAD_REQUEST).build();   // ou BAD_REQUEST CONFLICT
+		}		
+	}
 	
 	
 //	@DELETE
