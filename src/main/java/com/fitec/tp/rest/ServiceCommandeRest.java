@@ -51,7 +51,7 @@ public class ServiceCommandeRest {
 	// --> "services" vient de web.xml; 
 	// --> "rest" = path sur cette classe; 1=id
 	// --> "rest" vient de restSpringConf.xml
-	public List<Commande> rechercherCommandeByUser(@PathParam("id")int id){ // retourne un objet de type Commande
+	public List<Commande> rechercherCommandeByUser(@PathParam("id")int id){ // retourne une liste de type Commande
 		User user = new User();
 		user.setId(id);
 		return serviceCommande.rechercherCommandeByUser(user);

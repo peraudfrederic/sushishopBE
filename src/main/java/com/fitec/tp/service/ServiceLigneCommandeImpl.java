@@ -37,6 +37,12 @@ public class ServiceLigneCommandeImpl implements IServiceLigneCommande{
 		return lc;
 	}
 
+	@Override
+	public List<LigneCommande> rechercherLigneCommandeByCommande(Commande id_commande) {
+		return daoLigneCommande.selectByCommande(id_commande);
+	}
+
+
 	
 //	@Override
 //	public Auteur rechercherAuteur(int id) {

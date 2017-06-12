@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fitec.tp.entity.Commande;
 import com.fitec.tp.entity.LigneCommande;
 
 
@@ -36,6 +37,16 @@ public class DaoLigneCommande implements IDaoLigneCommande{
 		// remonte dans l'objet java lors du .persist()
 		// grace � @GeneratedValue() sur l'id de l'Auteur
 		return lc;
+	}
+
+	@Override
+	public List<LigneCommande> selectByCommande(Commande idCommande) {
+		
+		List<LigneCommande> lignesCommandes = entityManager.createNamedQuery("ligne_commande.idCommande", LigneCommande.class)
+				.setParameter("id_commande", idCommande)
+				.getResultList();
+		
+		return lignesCommandes;
 	}
 
 //	@Override
