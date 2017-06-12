@@ -1,6 +1,7 @@
 package com.fitec.tp.test;
 
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -39,6 +40,18 @@ public class TestServiceLigneCommande {
 		LigneCommande lc = serviceLigneCommande.rechercherLigneCommande(1);
 		Assert.assertTrue(lc.getId() == 1);
 		System.out.println(lc.toString());
+		
+	}
+	
+	@Test
+	public void testRechercherLigneCommandeByCommande(){
+		Commande commande = new Commande();		
+		commande.setId(1);
+		List<LigneCommande> lc = serviceLigneCommande.rechercherLigneCommandeByCommande(commande);
+		Assert.assertTrue(!lc.isEmpty());
+		System.out.println(lc.toString());
+		
+//		System.out.println(c.toStringLignes());
 		
 	}
 	

@@ -18,7 +18,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="ligne_commande") // nom exact de la table dans la bdd
-@NamedQueries({@NamedQuery(name = "ligne_commande.all", query = "SELECT lc FROM LigneCommande lc")})
+@NamedQueries({
+	@NamedQuery(name = "ligne_commande.all", query = "SELECT lc FROM LigneCommande lc"),
+	@NamedQuery(name = "ligne_commande.idCommande", query = "SELECT lc FROM LigneCommande lc WHERE lc.id_commande = :id_commande")
+	})
 @XmlType(namespace="http://entity.tp.fitec.com/")  // le nom du package a l'envers
 //@XmlRootElement(name="ligne_commande") // ne sert que pour du xml
 public class LigneCommande implements Serializable, IEntity{

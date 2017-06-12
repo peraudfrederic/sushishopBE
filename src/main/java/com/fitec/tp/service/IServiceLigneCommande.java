@@ -5,7 +5,9 @@ import java.util.List;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
+import com.fitec.tp.entity.Commande;
 import com.fitec.tp.entity.LigneCommande;
+import com.fitec.tp.entity.User;
 
 
 @WebService
@@ -14,6 +16,8 @@ import com.fitec.tp.entity.LigneCommande;
 public interface IServiceLigneCommande extends IService<LigneCommande> {
 	
 	LigneCommande rechercherLigneCommande(@WebParam(name="id")int id);
+	
+	List<LigneCommande> rechercherLigneCommandeByCommande(@WebParam(name="id")Commande idCommande);
 	
 	List<LigneCommande> selectAll();
 	

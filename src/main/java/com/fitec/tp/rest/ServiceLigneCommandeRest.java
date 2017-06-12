@@ -17,7 +17,9 @@ import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.fitec.tp.entity.Commande;
 import com.fitec.tp.entity.LigneCommande;
+import com.fitec.tp.entity.User;
 import com.fitec.tp.service.IServiceLigneCommande;
 
 
@@ -40,6 +42,18 @@ public class ServiceLigneCommandeRest {
 	// --> "rest" vient de restSpringConf.xml
 	public LigneCommande rechercherLigneCommande(@PathParam("id")int id){ // retourne un objet de type Auteur
 		return serviceLigneCommande.rechercherLigneCommande(id);
+	}
+	
+	@GET
+	@Path("/commande/{id}") // ce parametre vient de @PathParam("id")
+	// url complete : http://localhost:8080/sushiShop/services/rest/lignescommandes/commande/1
+	// --> "services" vient de web.xml; 
+	// --> "rest" = path sur cette classe; 1=id
+	// --> "rest" vient de restSpringConf.xml
+	public List<LigneCommande> rechercherLigneCommandeByCommande(@PathParam("id")int id){ // retourne une liste de type LigneCommande
+		Commande commande = new Commande();
+		commande.setId(id);
+		return serviceLigneCommande.rechercherLigneCommandeByCommande(commande);
 	}
 	
 	@GET
