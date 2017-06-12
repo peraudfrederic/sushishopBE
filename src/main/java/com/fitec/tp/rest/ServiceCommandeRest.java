@@ -114,7 +114,7 @@ public class ServiceCommandeRest {
 		try {
 			// enregistrerPanier(Panier panier)
 			//panier = serviceCommande.enregistrerPanier(panier);
-			serviceCommande.enregistrerPanier(panier);
+			//serviceCommande.enregistrerPanier(panier);
 			return Response
 					.status(Status.OK)
 					.entity(panier) // pour l'instant, on laisse même si null, juste pour tester

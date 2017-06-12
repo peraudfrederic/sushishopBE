@@ -39,6 +39,14 @@ public class LigneCommande implements Serializable, IEntity{
 		this.prix = prix;
 	}
 	
+	public LigneCommande(Integer id, Commande id_commande, Integer id_produit, Integer quantite, Float prix){
+		this.id = id;
+		this.id_commande = id_commande;
+		this.id_produit = id_produit;
+		this.quantite = quantite;
+		this.prix = prix;
+	}
+	
 	@ManyToOne
 	@JoinColumn(name="id_commande")	
 	private Commande id_commande;
