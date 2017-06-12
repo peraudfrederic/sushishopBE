@@ -10,12 +10,18 @@ import com.fitec.tp.entity.User;
 
 @WebService
 // @WebService et @WebParam est pris en compte pour un web service soap
-// et ignoré sur un service interne (ici Spring) injecté dans l'adaptateur REST
+// et ignorï¿½ sur un service interne (ici Spring) injectï¿½ dans l'adaptateur REST
 public interface IServiceProduit extends IService<Produit> {
 	
 	Produit rechercherProduit(@WebParam(name="id")int id);
 	
+//	Produit rechercherProduitByIdProduitLigneCommande(Produit idProduit);
+	
 	List<Produit> selectAll();
+	
+	boolean verifierStock(Produit idProduit, int quantiteCommandee);
+	
+	void majStock(Produit idProduit, int quantiteCommandee);
 	
 //	Produit ajouterProduit(@WebParam(name="produit")Produit p);
 //	

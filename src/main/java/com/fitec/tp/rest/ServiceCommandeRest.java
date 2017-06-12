@@ -107,18 +107,35 @@ public class ServiceCommandeRest {
 	// ou services est configur� dans web.xml et rest dans restSpringConfig
 	public Response createPanier(List<LignePanier> panier) {
 		try {
-		
+			
 			//on créé une commande à partir des informations du panier
 			Commande cmd = new Commande();
 			cmd.setDate(new Date());
 			User usr = serviceUser.rechercherUser(panier.get(0).getIdUser());
 			cmd.setId_user(usr);
-			Set<LigneCommande> lignesCommande = new HashSet<LigneCommande>();
-			
+			Set<LigneCommande> lignesCommande = new HashSet<LigneCommande>();			
+	
+			// on verifie si le stock est suffisant pour satisfaire la demande
 			for(LignePanier l : panier) {
 				LigneCommande lc = new LigneCommande(0, cmd, serviceProduit.rechercherProduit(l.getIdProduit()), l.getQuantite(), l.getPrix());
-				lignesCommande.add(lc);
-			}
+				
+				int quantiteCommandee = lc.getQuantite(); // pour chaque LignePanier, la quantité commandée
+				Produit idProduit = lc.getId_produit(); // pour chaque LignePanier, son id_produit	
+				
+				if(!serviceProduit.verifierStock(idProduit, quantiteCommandee)){
+					return Response.status(Status.BAD_REQUEST).build();   // ou BAD_REQUEST CONFLICT
+				}
+				else{
+					lignesCommande.add(lc); // on ajoute
+				}
+			}			
+			
+//			for(LignePanier l : panier) {
+//				LigneCommande lc = new LigneCommande(0, cmd, serviceProduit.rechercherProduit(l.getIdProduit()), l.getQuantite(), l.getPrix());
+//				lignesCommande.add(lc);
+//			}
+			
+
 			//on n'insere pas le tableau de ligne commande dans la commande
 			// car sinon plantage car ligneCommande sans vrai ID
 			//cmd.setLignesCommande(lignesCommande);
@@ -131,7 +148,15 @@ public class ServiceCommandeRest {
 			for(LigneCommande lc : lignesCommande)
 			{
 				lc.setId_commande(cmd);
+				
 				serviceLigneCommande.ajouterLigneCommande(lc);
+				
+				/////////////////////////////////////////
+				// Mise a jour du stock :
+				int quantiteCommandee = lc.getQuantite(); // pour chaque LigneCommande, la quantité commandée
+				Produit idProduit = lc.getId_produit(); // pour chaque LigneCommadnde, son id_produit					
+				serviceProduit.majStock(idProduit, quantiteCommandee); 				
+				//////////////////////////////////////////
 			}
 			
 			return Response

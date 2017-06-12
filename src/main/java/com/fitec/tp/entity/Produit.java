@@ -18,7 +18,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="produit") // nom exact de la table
-@NamedQueries({@NamedQuery(name = "produit.all", query = "SELECT p FROM Produit p")})
+@NamedQueries({
+		@NamedQuery(name = "produit.all", query = "SELECT p FROM Produit p"),
+		@NamedQuery(name = "produit.stock", query = "SELECT p FROM Produit p WHERE p.id = :id_produit")
+})
 @XmlType(namespace="http://entity.tp.fitec.com/")  // le nom du package a l'envers
 //@XmlRootElement(name="produit") // ne sert que dans du xml
 public class Produit implements Serializable, IEntity {

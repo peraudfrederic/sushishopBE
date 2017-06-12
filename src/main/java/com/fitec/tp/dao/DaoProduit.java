@@ -8,7 +8,9 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fitec.tp.entity.Commande;
 import com.fitec.tp.entity.Produit;
+import com.fitec.tp.entity.User;
 
 @Component // ou bien @Repository
 @Transactional // version Spring: c'est Spring qui va gerer les transaction dans la bdd. Pour cela il faudra un TransactionManager (voir fichier jpaSpringConf)
@@ -29,6 +31,20 @@ public class DaoProduit implements IDaoProduit{
 	}
 
 //	@Override
+//	public Produit selectByIdProduitLigneCommande(Produit idProduit) {
+//		Produit produit = null;
+//		
+//		List<Produit> produits = entityManager.createNamedQuery("produit.stock", Produit.class)
+//				.setParameter("id_produit", idProduit)
+//				.getResultList();
+//		
+//		if(produits.size() > 0)
+//			produit = produits.get(0);
+//		
+//		return produit;
+//	}
+
+//	@Override
 //	public Produit insertProduit(Produit p) {
 //		entityManager.persist(p);
 //		// la cl� primaire auto-incr�ment�e par mysql
@@ -44,12 +60,12 @@ public class DaoProduit implements IDaoProduit{
 //		// pour peaufiner, on aurait pu mettre if "id est null..."
 //		
 //	}
-//
-//	@Override
-//	public void updateProduit(Produit p) {
-//	// entityManager.getTransaction().beguin(); // effectu� via @Transactional donc pas besoin de gerer les transactions
-//		entityManager.merge(p);
-//		
-//	}
+
+	@Override
+	public void updateProduit(Produit p) {
+	// entityManager.getTransaction().beguin(); // effectu� via @Transactional donc pas besoin de gerer les transactions
+		entityManager.merge(p);
+		
+	}
 
 }

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fitec.tp.dao.IDaoProduit;
 import com.fitec.tp.entity.Produit;
 
+
 @WebService(endpointInterface="com.fitec.tp.service.IServiceProduit")
 @Service
 @Transactional // de Spring
@@ -27,6 +28,29 @@ public class ServiceProduitImpl implements IServiceProduit{
 	@Override
 	public List<Produit> selectAll() {
 		return daoProduit.selectAll();
+	}
+
+//	@Override
+//	public Produit rechercherProduitByIdProduitLigneCommande(Produit idProduit) {
+//		return daoProduit.selectByIdProduitLigneCommande(idProduit);
+//	}
+	
+	// Mise a jour du stock suite à une commande :
+	public void majStock(Produit idProduit, int quantiteCommandee){
+		int stockMaj = idProduit.getStock() - quantiteCommandee;
+		idProduit.setStock(stockMaj);
+		daoProduit.updateProduit(idProduit);				
+	}
+
+	@Override
+	public boolean verifierStock(Produit idProduit, int quantiteCommandee) {
+		boolean stockOK = false;
+		int etatStock = idProduit.getStock(); // quantite en stock
+		
+		if(quantiteCommandee <= etatStock){
+			stockOK = true;
+		}		
+		return stockOK;
 	}
 	
 //	@Override

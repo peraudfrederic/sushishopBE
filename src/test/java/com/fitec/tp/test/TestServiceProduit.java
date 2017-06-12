@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.fitec.tp.entity.Commande;
+import com.fitec.tp.entity.LigneCommande;
 import com.fitec.tp.entity.Produit;
+import com.fitec.tp.entity.User;
 import com.fitec.tp.service.IServiceProduit;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -47,6 +50,6 @@ public class TestServiceProduit {
 		for(Produit produit : listeProduits){
 			System.out.println(produit.toString());
 		}
-	}
-	
+	}	
+
 }
