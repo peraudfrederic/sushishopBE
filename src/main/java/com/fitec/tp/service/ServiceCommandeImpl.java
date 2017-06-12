@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fitec.tp.dao.IDaoCommande;
 import com.fitec.tp.entity.Commande;
 import com.fitec.tp.entity.LigneCommande;
-import com.fitec.tp.entity.Panier;
 import com.fitec.tp.entity.Produit;
 import com.fitec.tp.entity.User;
 
@@ -42,29 +41,7 @@ public class ServiceCommandeImpl implements IServiceCommande{
 		return c;
 	}
 	
-	// Enregistrer le panier
-	public void enregistrerPanier(Panier panier){	
-		
-		Date date = new Date();
-		
-		Commande newCommande = new Commande();
-		newCommande.setId_user(panier.getId_user());
-		newCommande.setDate(date);
 	
-		List<LigneCommande> listeLignesCommandes = panier.getListeLignesCommandes();
-		
-		//methode 2 -----------------------
-		for(LigneCommande lc : listeLignesCommandes)
-		{
-			LigneCommande newLigneCommande = new LigneCommande(lc.getId(), lc.getId_commande(), lc.getId_produit(), lc.getQuantite(), lc.getPrix());
-			newCommande.getLignesCommande().add(newLigneCommande);
-		}
-		daoCommande.insertCommande(newCommande);   // a priori va inserer les lignes commandes + la commande en bdd
-		
-		//return newCommande;			
-	}
-
-
 	@Override
 	public List<Commande> rechercherCommandeByUser(User id_user) {
 		return daoCommande.selectByUser(id_user);

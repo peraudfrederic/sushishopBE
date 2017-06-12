@@ -1,6 +1,9 @@
 package com.fitec.tp.rest;
 
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -18,10 +21,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.fitec.tp.entity.Commande;
+import com.fitec.tp.entity.LigneCommande;
 import com.fitec.tp.entity.LignePanier;
-import com.fitec.tp.entity.Panier;
+import com.fitec.tp.entity.Produit;
 import com.fitec.tp.entity.User;
 import com.fitec.tp.service.IServiceCommande;
+import com.fitec.tp.service.IServiceLigneCommande;
+import com.fitec.tp.service.IServiceProduit;
+import com.fitec.tp.service.IServiceUser;
 
 
 @Path("/commandes")
@@ -34,6 +41,15 @@ public class ServiceCommandeRest {
 	@Autowired
 	private IServiceCommande serviceCommande; // service interne (appel� en interne)
 	// ou private IDaoCommande daoCommande; // dao interne
+	
+	@Autowired
+	private IServiceLigneCommande serviceLigneCommande;
+	
+	@Autowired
+	private IServiceUser serviceUser;
+	
+	@Autowired
+	private IServiceProduit serviceProduit;
 	
 	@GET
 	@Path("/{id}") // ce parametre vient de @PathParam("id")
@@ -85,37 +101,39 @@ public class ServiceCommandeRest {
 	}	
 	
 	@POST
-	@Path("/panier2")
-	@CrossOriginResourceSharing(allowAllOrigins = true)
-	// url complete : http://localhost:8080/sushiShop/services/rest/commandes/panier
-	// ou services est configur� dans web.xml et rest dans restSpringConfig
-	public Response createPanier(Panier panier) {
-		try {
-			// enregistrerPanier(Panier panier)
-			//panier = serviceCommande.enregistrerPanier(panier);
-			serviceCommande.enregistrerPanier(panier);
-			return Response
-					.status(Status.OK)
-					.entity(panier) // pour l'instant, on laisse même si null, juste pour tester
-					.build();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return Response.status(Status.BAD_REQUEST).build();   // ou BAD_REQUEST CONFLICT
-		}		
-	}	
-	
-	
-	@POST
 	@Path("/panier")
 	@CrossOriginResourceSharing(allowAllOrigins = true)
 	// url complete : http://localhost:8080/sushiShop/services/rest/commandes/panier
 	// ou services est configur� dans web.xml et rest dans restSpringConfig
-	public Response createPanier(LignePanier[] panier) {
+	public Response createPanier(List<LignePanier> panier) {
 		try {
-			// enregistrerPanier(Panier panier)
-			//panier = serviceCommande.enregistrerPanier(panier);
-			//serviceCommande.enregistrerPanier(panier);
-			System.out.println("on est entré !!");
+		
+			//on créé une commande à partir des informations du panier
+			Commande cmd = new Commande();
+			cmd.setDate(new Date());
+			User usr = serviceUser.rechercherUser(panier.get(0).getIdUser());
+			cmd.setId_user(usr);
+			Set<LigneCommande> lignesCommande = new HashSet<LigneCommande>();
+			
+			for(LignePanier l : panier) {
+				LigneCommande lc = new LigneCommande(0, cmd, serviceProduit.rechercherProduit(l.getIdProduit()), l.getQuantite(), l.getPrix());
+				lignesCommande.add(lc);
+			}
+			//on n'insere pas le tableau de ligne commande dans la commande
+			// car sinon plantage car ligneCommande sans vrai ID
+			//cmd.setLignesCommande(lignesCommande);
+			
+			// on la persiste en BDD
+			cmd = serviceCommande.ajouterCommande(cmd);
+			
+			// on met à jours l'ID de la commande pour chaque ligne de commande et on la persiste en BDD
+			//lignesCommande.forEach(lc -> lc.setId_commande(cmd));
+			for(LigneCommande lc : lignesCommande)
+			{
+				lc.setId_commande(cmd);
+				serviceLigneCommande.ajouterLigneCommande(lc);
+			}
+			
 			return Response
 					.status(Status.OK)
 					.entity(panier) // pour l'instant, on laisse même si null, juste pour tester
