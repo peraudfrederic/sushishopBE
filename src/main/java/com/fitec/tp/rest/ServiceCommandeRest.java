@@ -115,6 +115,7 @@ public class ServiceCommandeRest {
 			// enregistrerPanier(Panier panier)
 			//panier = serviceCommande.enregistrerPanier(panier);
 			//serviceCommande.enregistrerPanier(panier);
+			System.out.println("on est entré !!");
 			return Response
 					.status(Status.OK)
 					.entity(panier) // pour l'instant, on laisse même si null, juste pour tester
